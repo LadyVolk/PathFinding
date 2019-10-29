@@ -17,14 +17,14 @@ namespace	PF
 			j = 0;
 			i = vf;
 			while (i != vi) {
-				order_path[j] = parent[i];
+				order_path[j] = i;
 				i = parent[i];
 				j++;
 			}
 			order_path[j] = vi;
-			for (i=0; i <= j; i++) {
+			for (i=j; i >= 0; i--) {
 				cout << order_path[i];
-				if (i != j) {
+				if (i != 0) {
 					cout << " -> ";
 				}
 			}
