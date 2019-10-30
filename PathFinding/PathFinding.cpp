@@ -6,6 +6,7 @@
 #include "GraphFuncs.h"
 #include "Input.h"
 #include "PF.h"
+#include "PriorityQueue.h"
 using namespace std;
 
 int main()
@@ -14,7 +15,7 @@ int main()
 	pair<int*, int> sequence;
 	int v, w, a, i, *num, *aux, *parent, cost;
 	GraphAdj* graph;
-
+	PriorityQueue* queue;
 	srand(time(NULL));
 
 	cout << "press 1 for random graph or 2 to create an empty graph" << endl;

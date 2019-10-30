@@ -156,6 +156,7 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="PathFinding.cpp" />
     <ClCompile Include="PF.cpp" />
+    <ClCompile Include="PriorityQueue.cpp" />
     <ClCompile Include="Queue.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +164,7 @@
     <ClInclude Include="GraphFuncs.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="PF.h" />
+    <ClInclude Include="PriorityQueue.h" />
     <ClInclude Include="Queue.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
