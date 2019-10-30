@@ -12,7 +12,7 @@ int main()
 {
 	string input;
 	pair<int*, int> sequence;
-	int v, w, a, i, *num, *aux, *parent;
+	int v, w, a, i, *num, *aux, *parent, cost;
 	GraphAdj* graph;
 
 	srand(time(NULL));
@@ -47,7 +47,7 @@ int main()
 	while (true) {
 
 		cout << "--------------------" << endl;
-		cout << "type 'add' to add an arc" << endl;
+		cout << "type 'add' to add an arc and its cost" << endl;
 		cout << "type 'remove' to remove an arc" << endl;
 		cout << "type 'draw' to draw the graph" << endl;
 		cout << "type 'walk' to check a walk" << endl;
@@ -68,7 +68,9 @@ int main()
 		if (input == "add") {
 			cout << "type two vertices to add an arc in between" << endl;
 			cin >> v >> w;
-			graph->InsertArc(v, w);
+			cout << "now insert the cost(your life)" << endl;
+			cin >> cost;
+			graph->InsertArc(v, w, cost);
 		}
 		else if (input == "remove") {
 			cout << "type two vertices to remove an arc in between" << endl;

@@ -6,6 +6,7 @@ using namespace std;
 
 GraphAdj* RandomGraph1(int v, int a) {
 	float rand1, rand2;
+	int cost;
 	GraphAdj* graph;
 
 	graph = new GraphAdj(v);
@@ -15,7 +16,8 @@ GraphAdj* RandomGraph1(int v, int a) {
 		rand1 = rand() % v;
 		rand2 = rand() % v;
 		if (rand1 != rand2) {
-			graph->InsertArc(rand1, rand2);
+			cost = rand() % 100;
+			graph->InsertArc(rand1, rand2, cost);
 		}
 	}
 	return graph;
@@ -23,7 +25,7 @@ GraphAdj* RandomGraph1(int v, int a) {
 
 GraphAdj* RandomGraph2(int size, int a) {
 	GraphAdj* graph;
-	int v, w;
+	int v, w, cost;
 
 	float probs, r;
 	probs = (float)a / (size * (size - 1));
@@ -34,7 +36,8 @@ GraphAdj* RandomGraph2(int size, int a) {
 			if (v != w) {
 				r = (float)rand() / RAND_MAX;
 				if (r <= probs) {
-					graph->InsertArc(v, w);
+					cost = rand() % 100;
+					graph->InsertArc(v, w, cost);
 				}
 			}
 		}
@@ -132,7 +135,7 @@ bool CheckSimpleCycle(GraphAdj* graph, int seq[], int seq_size) {
 	}
 }
 GraphAdj* RemoveV(GraphAdj* graph_old, int vertex) {
-	int i, j, new_i, new_j;
+	int i, j, new_i, new_j, cost = rand() % 100;
 	GraphAdj* graph = new GraphAdj(graph_old->GetV()-1);
 	for (i = 0; i < graph_old->GetV(); i++) {
 		for (j = 0; j < graph_old->GetV(); j++) {
@@ -145,7 +148,7 @@ GraphAdj* RemoveV(GraphAdj* graph_old, int vertex) {
 				if (j > vertex) {
 					new_j = j - 1;
 				}
-				graph->InsertArc(new_i, new_j);
+				graph->InsertArc(new_i, new_j, graph_old->GetCost(i, j));
 			}
 		}
 	}
@@ -159,7 +162,7 @@ GraphAdj* CopyGraph(GraphAdj* old_graph) {
 	for (i = 0; i < graph->GetV(); i++) {
 		for (j = 0; j < graph->GetV(); j++) {
 			if (old_graph->IsArc(i, j)) {
-				graph->InsertArc(i, j);
+				graph->InsertArc(i, j, old_graph->GetCost(i, j));
 			}
 		}
 	}
