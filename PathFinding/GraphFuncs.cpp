@@ -241,3 +241,41 @@ void BFS(GraphAdj* graph, int initial, int *num, int *parent) {
 
 	delete queue;
 }
+void BFSEarlyExit(GraphAdj* graph, int initial, int* num, int* parent, int vf) {
+	Queue* queue;
+	bool early_exit = false;
+	int i, v, cont = 0;
+	queue = new Queue(graph->GetV());
+
+	for (i = 0; i < graph->GetV(); i++) {
+		num[i] = -1;
+		parent[i] = -1;
+	}
+
+	num[initial] = cont++;
+	parent[initial] = initial;
+
+	queue->Enqueue(initial);
+	while (!queue->IsEmpty()) {
+		v = queue->Dequeue();
+		for (i = 0; i < graph->GetV(); i++) {
+			if (graph->IsArc(v, i) && num[i] == -1) {
+
+				parent[i] = v;
+
+				num[i] = cont++;
+
+				queue->Enqueue(i);
+
+				if (i == vf) {
+					early_exit = true;
+					break;
+				}
+			}
+		}
+		if (early_exit) {
+			break;
+		}
+	}
+	delete queue;
+}

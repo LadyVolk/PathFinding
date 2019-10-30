@@ -60,6 +60,7 @@ int main()
 		cout << "type 'acessible' to check if there is a pth between two v" << endl;
 		cout << "type 'bfs' to search the graph" << endl;
 		cout << "type 'pf_bfs' to run pathfinding by bfs" << endl;
+		cout << "type 'pf_early' to run pathfinding by bfs with early exit" << endl;
 		cout << "type 'exit' to exit the program" << endl;
 
 		cin >> input;
@@ -194,6 +195,11 @@ int main()
 			cout << "type the initial and final vertices:" << endl;
 			cin >> v >> w;
 			PF::BFS(graph, v, w);
+		}
+		else if (input == "pf_early") {
+			cout << "type the initial and final vertices:" << endl;
+			cin >> v >> w;
+			PF::BFSEarlyExit(graph, v, w);
 		}
 		else if (input == "exit") {
 			break;

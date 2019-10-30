@@ -14,3 +14,4 @@ bool IsTopological(GraphAdj* graph);
 bool Reach(GraphAdj* graph, int vi, int vf);
 void visit_adj(GraphAdj* graph, int v, bool* visited);
 void BFS(GraphAdj* graph, int initial, int* num, int* parent);
+void BFSEarlyExit(GraphAdj* graph, int initial, int* num, int* parent, int vf);
