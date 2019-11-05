@@ -2,6 +2,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include "Queue.h"
+#include "PriorityQueue.h"
 using namespace std;
 
 GraphAdj* RandomGraph1(int v, int a) {
@@ -280,5 +281,41 @@ void BFSEarlyExit(GraphAdj* graph, int initial, int* num, int* parent, int vf) {
 			break;
 		}
 	}
+	delete queue;
+}
+void Pre_Dijkstra(GraphAdj* graph, int initial, int* parent, int vf) {
+	PriorityQueue* queue;
+	int i, v, *cost, temp_cost;
+	queue = new PriorityQueue();
+	cost = new int[graph->GetV()];
+
+	for (i = 0; i < graph->GetV(); i++) {
+		parent[i] = -1;
+		cost[i] = -1;
+	}
+
+	parent[initial] = initial;
+	cost[initial] = 0;
+
+	queue->Enqueue(initial, 0);
+	while (!queue->IsEmpty()) {
+		v = queue->Dequeue();
+		if (v == vf) {
+			break;
+		}
+		for (i = 0; i < graph->GetV(); i++) {
+			temp_cost = cost[v] + graph->GetCost(v, i);
+			if (graph->IsArc(v, i) && 
+				(cost[i] == -1 || temp_cost < cost[i])) {
+
+				cost[i] = temp_cost;
+
+				parent[i] = v;
+
+				queue->Enqueue(i, temp_cost);
+			}
+		}
+	}
+	delete[] cost;
 	delete queue;
 }

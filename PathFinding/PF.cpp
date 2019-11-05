@@ -73,4 +73,37 @@ namespace	PF
 		delete[] num;
 		delete[] order_path;
 	}
+
+	void Dijkstra(GraphAdj* graph, int vi, int vf) {
+		int i, j, *parent, *order_path;
+
+		parent = new int[graph->GetV()];
+		order_path = new int[graph->GetV()];
+
+		Pre_Dijkstra(graph, vi, parent, vf);
+
+		if (parent[vf] != -1) {
+			j = 0;
+			i = vf;
+			while (i != vi) {
+				order_path[j] = i;
+				i = parent[i];
+				j++;
+			}
+			order_path[j] = vi;
+			for (i = j; i >= 0; i--) {
+				cout << order_path[i];
+				if (i != 0) {
+					cout << " -> ";
+				}
+			}
+			cout << endl;
+		}
+		else {
+			cout << "there is no path between " << vi <<
+				" and " << vf << endl;
+		}
+		delete[] parent;
+		delete[] order_path;
+	}
 }

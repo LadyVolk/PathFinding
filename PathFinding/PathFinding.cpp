@@ -62,6 +62,7 @@ int main()
 		cout << "type 'bfs' to search the graph" << endl;
 		cout << "type 'pf_bfs' to run pathfinding by bfs" << endl;
 		cout << "type 'pf_early' to run pathfinding by bfs with early exit" << endl;
+		cout << "type 'dijkstra' to run dijkstra pathfinding" << endl;
 		cout << "type 'exit' to exit the program" << endl;
 
 		cin >> input;
@@ -203,6 +204,11 @@ int main()
 			cout << "type the initial and final vertices:" << endl;
 			cin >> v >> w;
 			PF::BFSEarlyExit(graph, v, w);
+		}
+		else if (input == "dijkstra") {
+			cout << "type the initial and final vertices" << endl;
+			cin >> v >> w;
+			PF::Dijkstra(graph, v, w);
 		}
 		else if (input == "exit") {
 			break;
