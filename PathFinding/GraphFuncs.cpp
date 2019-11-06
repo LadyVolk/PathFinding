@@ -319,3 +319,36 @@ void Pre_Dijkstra(GraphAdj* graph, int initial, int* parent, int vf) {
 	delete[] cost;
 	delete queue;
 }
+
+GraphAdj* GridGraph(int width, int height) {
+	int i, j, v = 0;
+	GraphAdj *grid;
+
+	grid = new GraphAdj(width*height);
+	
+	for (i = 0; i < width; i++) {
+		for (j = 0; j < height; j++) {
+			grid->SetPos(v, j, i);
+			v++;
+		}
+	}
+
+	for (v = 0; v < grid->GetV(); v++) {
+		int x, y;
+		x = grid->GetPos(v).first;
+		y = grid->GetPos(v).second;
+		if (y > 0) {
+			grid->InsertArc(v, v-width, 0);
+		}
+		if (x < width-1) {
+			grid->InsertArc(v, v + 1, 0);
+		}
+		if (y < height-1) {
+			grid->InsertArc(v, v + width, 0);
+		}
+		if (x > 0) {
+			grid->InsertArc(v, v-1, 0);
+		}
+	}
+	return grid;
+}

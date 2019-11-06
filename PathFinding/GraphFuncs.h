@@ -3,6 +3,7 @@
 
 GraphAdj* RandomGraph1(int v, int a);
 GraphAdj* RandomGraph2(int v, int a);
+GraphAdj* GridGraph(int width, int height);
 
 bool CheckWalk(GraphAdj* graph, int seq[], int seq_size);
 bool CheckPath(GraphAdj* graph, int seq[], int seq_size);

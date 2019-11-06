@@ -18,7 +18,9 @@ int main()
 	PriorityQueue* queue;
 	srand(time(NULL));
 
-	cout << "press 1 for random graph or 2 to create an empty graph" << endl;
+	cout << "press 1 for random graph " << endl;
+	cout << "press 2 to create an empty graph" << endl;
+	cout << "press 3 to create a grid" << endl;
 
 	cin >> input;
 
@@ -40,6 +42,11 @@ int main()
 		cout << "how many vertices do you want?" << endl;
 		cin >> v;
 		graph = new GraphAdj(v);
+	}
+	else if (input == "3") {
+		cout << "tell me the width and height do you want?" << endl;
+		cin >> w >> v;
+		graph = GridGraph(w, v);
 	}
 	else {
 		return 0;

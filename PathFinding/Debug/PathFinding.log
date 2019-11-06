@@ -2,5 +2,10 @@
 C:\Users\volkl\OneDrive\Documentos\DataAndAlgorithms\PathFinding\PathFinding\GraphFuncs.cpp(17,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\volkl\OneDrive\Documentos\DataAndAlgorithms\PathFinding\PathFinding\GraphFuncs.cpp(18,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\volkl\OneDrive\Documentos\DataAndAlgorithms\PathFinding\PathFinding\GraphFuncs.cpp(21,28): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  PathFinding.cpp
 C:\Users\volkl\OneDrive\Documentos\DataAndAlgorithms\PathFinding\PathFinding\GraphFuncs.cpp(21,21): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\volkl\OneDrive\Documentos\DataAndAlgorithms\PathFinding\PathFinding\PathFinding.cpp(19,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  PF.cpp
+  Generating Code...
+C:\Users\volkl\OneDrive\Documentos\DataAndAlgorithms\PathFinding\PathFinding\PathFinding.cpp(18,17): warning C4101: 'queue': unreferenced local variable
   PathFinding.vcxproj -> C:\Users\volkl\OneDrive\Documentos\DataAndAlgorithms\PathFinding\Debug\PathFinding.exe

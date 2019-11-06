@@ -1,11 +1,14 @@
 #include "GraphAdj.h"
 #include <iostream>
+#include <utility>
 using namespace std;
 
 GraphAdj::GraphAdj(int size) {
 	int i, j;
 	V = size;
 	A = 0;
+
+	Pos = new pair <int, int>[V];
 	Adj = new bool* [V];
 	Cost = new int* [V];
 	for (i = 0; i < V; i++) {
@@ -19,6 +22,10 @@ GraphAdj::GraphAdj(int size) {
 		for (j = 0; j < V; j++) {
 			Cost[i][j] = -1;
 		}
+	}
+	for (i = 0; i < V; i++) {
+		Pos[i].first = 0;
+		Pos[i].second = i;
 	}
 }
 
@@ -89,4 +96,11 @@ int GraphAdj::GetOutDegree(int v) {
 }
 int GraphAdj::GetCost(int v, int w) {
 	return Cost[v][w];
+}
+void GraphAdj::SetPos(int v, int x, int y) {
+	Pos[v].first = x;
+	Pos[v].second = y;
+}
+pair <int, int> GraphAdj::GetPos(int v) {
+	return Pos[v];
 }
