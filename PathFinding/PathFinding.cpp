@@ -13,7 +13,7 @@ int main()
 {
 	string input;
 	pair<int*, int> sequence;
-	int v, w, a, i, *num, *aux, *parent, cost;
+	int v, w, a, i, *num, *aux, *parent, cost, walls;
 	GraphAdj* graph;
 	PriorityQueue* queue;
 	srand(time(NULL));
@@ -21,6 +21,7 @@ int main()
 	cout << "press 1 for random graph " << endl;
 	cout << "press 2 to create an empty graph" << endl;
 	cout << "press 3 to create a grid" << endl;
+	cout << "press 4 to create a grid with walls" << endl;
 
 	cin >> input;
 
@@ -47,6 +48,13 @@ int main()
 		cout << "tell me the width and height do you want?" << endl;
 		cin >> w >> v;
 		graph = GridGraph(w, v);
+	}
+	else if (input == "4") {
+		cout << "tell me the width and height do you want?" << endl;
+		cin >> w >> v;
+		cout << "now tell me the number of walls" << endl;
+		cin >> walls;
+		graph = RandomGrid(walls, w, v);
 	}
 	else {
 		return 0;

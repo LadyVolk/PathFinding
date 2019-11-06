@@ -4,6 +4,7 @@
 GraphAdj* RandomGraph1(int v, int a);
 GraphAdj* RandomGraph2(int v, int a);
 GraphAdj* GridGraph(int width, int height);
+GraphAdj* RandomGrid(int walls, int width, int height);
 
 bool CheckWalk(GraphAdj* graph, int seq[], int seq_size);
 bool CheckPath(GraphAdj* graph, int seq[], int seq_size);
@@ -17,3 +18,4 @@ void visit_adj(GraphAdj* graph, int v, bool* visited);
 void BFS(GraphAdj* graph, int initial, int* num, int* parent);
 void BFSEarlyExit(GraphAdj* graph, int initial, int* num, int* parent, int vf);
 void Pre_Dijkstra(GraphAdj* graph, int initial, int* parent, int vf);
+void CreateWall(GraphAdj* grid, int v, int width, int height);

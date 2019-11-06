@@ -21,7 +21,7 @@ public:
 	void Draw();
 	int GetArc();
 	bool IsArc(int v, int w);
-	int GetV();4 
+	int GetV();
 	int GetInDegree(int v);
 	int GetOutDegree(int v);
 	int GetCost(int v, int w);

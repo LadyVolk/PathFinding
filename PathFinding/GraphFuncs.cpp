@@ -352,3 +352,40 @@ GraphAdj* GridGraph(int width, int height) {
 	}
 	return grid;
 }
+
+void CreateWall(GraphAdj *grid, int v, int width, int height) {
+	int x, y;
+	x = grid->GetPos(v).first;
+	y = grid->GetPos(v).second;
+	if (y > 0) {
+		grid->RemoveArc(v, v - width);
+		grid->RemoveArc(v - width, v);
+	}
+	if (x < width - 1) {
+		grid->RemoveArc(v, v + 1);
+		grid->RemoveArc(v + 1, v);
+	}
+	if (y < height - 1) {
+		grid->RemoveArc(v, v + width);
+		grid->RemoveArc(v + width, v);
+	}
+	if (x > 0) {
+		grid->RemoveArc(v, v - 1);
+		grid->RemoveArc(v - 1, v);
+	}
+}
+
+GraphAdj* RandomGrid(int walls, int width, int height) {
+	int i;
+	float probs, r;
+	GraphAdj *graph;
+	graph  = GridGraph(width, height);
+	probs = (float)walls / graph->GetV();
+	for (i = 0; i < graph->GetV(); i++) {
+		r = (float)rand() / RAND_MAX;
+		if (r <= probs) {
+			CreateWall(graph, i, width, height);
+		}
+	}
+	return graph;
+}
