@@ -283,7 +283,7 @@ void BFSEarlyExit(GraphAdj* graph, int initial, int* num, int* parent, int vf) {
 	}
 	delete queue;
 }
-void Pre_Dijkstra(GraphAdj* graph, int initial, int* parent, int vf) {
+void PreDijkstra(GraphAdj* graph, int initial, int* parent, int vf) {
 	PriorityQueue* queue;
 	int i, v, *cost, temp_cost;
 	queue = new PriorityQueue();
@@ -323,6 +323,7 @@ void Pre_Dijkstra(GraphAdj* graph, int initial, int* parent, int vf) {
 GraphAdj* GridGraph(int width, int height) {
 	int i, j, v = 0;
 	GraphAdj *grid;
+	int random = rand() % 10;
 
 	grid = new GraphAdj(width*height);
 	
@@ -338,16 +339,16 @@ GraphAdj* GridGraph(int width, int height) {
 		x = grid->GetPos(v).first;
 		y = grid->GetPos(v).second;
 		if (y > 0) {
-			grid->InsertArc(v, v-width, 0);
+			grid->InsertArc(v, v-width, random);
 		}
 		if (x < width-1) {
-			grid->InsertArc(v, v + 1, 0);
+			grid->InsertArc(v, v + 1, random);
 		}
 		if (y < height-1) {
-			grid->InsertArc(v, v + width, 0);
+			grid->InsertArc(v, v + width, random);
 		}
 		if (x > 0) {
-			grid->InsertArc(v, v-1, 0);
+			grid->InsertArc(v, v-1, random);
 		}
 	}
 	return grid;
@@ -388,4 +389,50 @@ GraphAdj* RandomGrid(int walls, int width, int height) {
 		}
 	}
 	return graph;
+}
+
+int DistanceGrid(GraphAdj *graph, int vi, int vf) {
+	pair <int, int> pos_vi, pos_vf;
+	int total_dis;
+	pos_vi = graph->GetPos(vi);
+	pos_vf = graph->GetPos(vf);
+
+	return abs(pos_vi.first - pos_vf.first) + abs(pos_vi.second - pos_vf.second);
+}
+
+void PreAStar(GraphAdj* graph, int initial, int* parent, int vf) {
+	PriorityQueue* queue;
+	int i, v, * cost, temp_cost;
+	queue = new PriorityQueue();
+	cost = new int[graph->GetV()];
+
+	for (i = 0; i < graph->GetV(); i++) {
+		parent[i] = -1;
+		cost[i] = -1;
+	}
+
+	parent[initial] = initial;
+	cost[initial] = 0;
+
+	queue->Enqueue(initial, 0);
+	while (!queue->IsEmpty()) {
+		v = queue->Dequeue();
+		if (v == vf) {
+			break;
+		}
+		for (i = 0; i < graph->GetV(); i++) {
+			temp_cost = cost[v] + graph->GetCost(v, i);
+			if (graph->IsArc(v, i) &&
+				(cost[i] == -1 || temp_cost < cost[i])) {
+
+				cost[i] = temp_cost;
+
+				parent[i] = v;
+
+				queue->Enqueue(i, temp_cost + 3*DistanceGrid(graph, i, vf));
+			}
+		}
+	}
+	delete[] cost;
+	delete queue;
 }

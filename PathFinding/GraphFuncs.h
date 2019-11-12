@@ -17,5 +17,6 @@ bool Reach(GraphAdj* graph, int vi, int vf);
 void visit_adj(GraphAdj* graph, int v, bool* visited);
 void BFS(GraphAdj* graph, int initial, int* num, int* parent);
 void BFSEarlyExit(GraphAdj* graph, int initial, int* num, int* parent, int vf);
-void Pre_Dijkstra(GraphAdj* graph, int initial, int* parent, int vf);
+void PreDijkstra(GraphAdj* graph, int initial, int* parent, int vf);
 void CreateWall(GraphAdj* grid, int v, int width, int height);
+void PreAStar(GraphAdj* graph, int initial, int* parent, int vf);
