@@ -11,18 +11,22 @@ GraphAdj::GraphAdj(int size) {
 	Pos = new pair <int, int>[V];
 	Adj = new bool* [V];
 	Cost = new int* [V];
+
+	//initialising adjancency matrix
 	for (i = 0; i < V; i++) {
 		Adj[i] = new bool[V];
 		for (j = 0; j < V; j++) {
 			Adj[i][j] = false;
 		}
 	}
+	//initialising cost matrix (-1 is undefined cost)
 	for (i = 0; i < V; i++) {
 		Cost[i] = new int[V];
 		for (j = 0; j < V; j++) {
 			Cost[i][j] = -1;
 		}
 	}
+	//inicial position for all vertices for a*
 	for (i = 0; i < V; i++) {
 		Pos[i].first = 0;
 		Pos[i].second = i;
@@ -36,6 +40,12 @@ GraphAdj::~GraphAdj() {
 		delete [] Adj[i];
 	}
 	delete [] Adj;
+
+	for (i = 0; i < V; i++) {
+		delete[] Cost[i];
+	}
+	delete[] Cost;
+	delete[] Pos;
 }
 
 void GraphAdj::InsertArc(int v, int w, int cost) {

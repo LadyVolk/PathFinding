@@ -9,7 +9,7 @@ private:
 	int A;
 	bool **Adj;
 	int **Cost;
-	pair<int, int > * Pos;
+	pair<int, int >*Pos;
 
 public:
 

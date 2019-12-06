@@ -5,6 +5,8 @@
 #include "PriorityQueue.h"
 using namespace std;
 
+//creates a random graph
+//puts the amount of arcs received in random pair of vertices
 GraphAdj* RandomGraph1(int v, int a) {
 	float rand1, rand2;
 	int cost;
@@ -24,6 +26,9 @@ GraphAdj* RandomGraph1(int v, int a) {
 	return graph;
 }
 
+//creates a random graph
+//the chance of having an arc between two vertices is calculated and used to insert the arcs
+//the final number of arcs is an aproximation to the number received
 GraphAdj* RandomGraph2(int size, int a) {
 	GraphAdj* graph;
 	int v, w, cost;
@@ -46,7 +51,7 @@ GraphAdj* RandomGraph2(int size, int a) {
 
 	return graph;
 }
-
+//check if given sequence of vertices is a walk
 bool CheckWalk(GraphAdj* graph, int *seq, int seq_size) {
 	int i;
 	for (i = 0; i <= seq_size - 2; i++) {
@@ -56,7 +61,7 @@ bool CheckWalk(GraphAdj* graph, int *seq, int seq_size) {
 	}
 	return true;
 }
-
+//check if given sequence of vertices is a path
 bool CheckPath(GraphAdj* graph, int seq[], int seq_size) {
 	int i, j;
 	bool** matrix;
@@ -82,7 +87,7 @@ bool CheckPath(GraphAdj* graph, int seq[], int seq_size) {
 	delete[] matrix;
 	return true;
 }
-
+//check if given sequence of vertices is a simple path
 bool CheckSimplePath(GraphAdj* graph, int seq[], int seq_size) {
 	int i;
 	bool* a;
@@ -105,13 +110,13 @@ bool CheckSimplePath(GraphAdj* graph, int seq[], int seq_size) {
 		return false;
 	}
 }
-
+//check if given sequence of vertices is a cycle
 bool CheckCycle(GraphAdj* graph, int seq[], int seq_size) {
 	return (CheckPath(graph, seq, seq_size) &&
 		seq[0] == seq[seq_size - 1] &&
 		seq_size > 1);
 }
-
+//check if given sequence of vertices is simple cycle
 bool CheckSimpleCycle(GraphAdj* graph, int seq[], int seq_size) {
 	int i;
 	bool* a;
@@ -169,6 +174,7 @@ GraphAdj* CopyGraph(GraphAdj* old_graph) {
 	}
 	return graph;
 }
+//check if graph is topological
 bool IsTopological(GraphAdj* graph) {
 	int i, j = 0;
 	bool was_removed = true;
@@ -186,7 +192,7 @@ bool IsTopological(GraphAdj* graph) {
 	}
 	return (new_graph->GetV() == 0);
 }
-
+//check if there is a path between two vertices
 bool Reach(GraphAdj* graph, int vi, int vf) {
 	bool *visited, result;
 	int i;
@@ -202,7 +208,8 @@ bool Reach(GraphAdj* graph, int vi, int vf) {
 
 	return result;
 }
-
+//auxiliar recursive function
+//called on Reach to visit given vertex and tries to visit unvisited neighbours
 void visit_adj(GraphAdj* graph, int v, bool* visited) {
 	int i;
 
@@ -214,8 +221,10 @@ void visit_adj(GraphAdj* graph, int v, bool* visited) {
 		}
 	}
 }
-
-void BFS(GraphAdj* graph, int initial, int *num, int *parent) {
+// breadth-first-search function to pre proccess the graph
+//enumerates the vertices and creates a parent array
+//uses a queue for enumeration
+void PreBFS(GraphAdj* graph, int initial, int *num, int *parent) {
 	Queue *queue;
 	int i, v, cont = 0;
 	queue = new Queue(graph->GetV());
@@ -245,7 +254,9 @@ void BFS(GraphAdj* graph, int initial, int *num, int *parent) {
 
 	delete queue;
 }
-void BFSEarlyExit(GraphAdj* graph, int initial, int* num, int* parent, int vf) {
+//impoves BFS using early exit for efficiency
+//leaves the function after finding final vertex
+void PreBFSEarlyExit(GraphAdj* graph, int initial, int* num, int* parent, int vf) {
 	Queue* queue;
 	bool early_exit = false;
 	int i, v, cont = 0;
@@ -283,6 +294,8 @@ void BFSEarlyExit(GraphAdj* graph, int initial, int* num, int* parent, int vf) {
 	}
 	delete queue;
 }
+//dijkstra algorithm, it is BFS that takes cost between vertices in consideration
+//uses priority queue
 void PreDijkstra(GraphAdj* graph, int initial, int* parent, int vf) {
 	PriorityQueue* queue;
 	int i, v, *cost, temp_cost;
@@ -319,7 +332,7 @@ void PreDijkstra(GraphAdj* graph, int initial, int* parent, int vf) {
 	delete[] cost;
 	delete queue;
 }
-
+//creates a grid graph
 GraphAdj* GridGraph(int width, int height) {
 	int i, j, v = 0;
 	GraphAdj *grid;
@@ -353,7 +366,7 @@ GraphAdj* GridGraph(int width, int height) {
 	}
 	return grid;
 }
-
+//create a vertix without arcs, therefore a wall on a grid graph
 void CreateWall(GraphAdj *grid, int v, int width, int height) {
 	int x, y;
 	x = grid->GetPos(v).first;
@@ -375,7 +388,7 @@ void CreateWall(GraphAdj *grid, int v, int width, int height) {
 		grid->RemoveArc(v - 1, v);
 	}
 }
-
+//creates random grid graph with walls
 GraphAdj* RandomGrid(int walls, int width, int height) {
 	int i;
 	float probs, r;
@@ -390,7 +403,7 @@ GraphAdj* RandomGrid(int walls, int width, int height) {
 	}
 	return graph;
 }
-
+//calculates the distance between two vertices on a grid
 int DistanceGrid(GraphAdj *graph, int vi, int vf) {
 	pair <int, int> pos_vi, pos_vf;
 	int total_dis;
@@ -399,7 +412,8 @@ int DistanceGrid(GraphAdj *graph, int vi, int vf) {
 
 	return abs(pos_vi.first - pos_vf.first) + abs(pos_vi.second - pos_vf.second);
 }
-
+//A* alghrithm, it is an improvement over Dijkstra
+//it uses an heuristic function to better find the shortest to the final vertex
 void PreAStar(GraphAdj* graph, int initial, int* parent, int vf) {
 	PriorityQueue* queue;
 	int i, v, * cost, temp_cost;

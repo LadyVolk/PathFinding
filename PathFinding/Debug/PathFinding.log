@@ -1,2 +1,11 @@
-﻿  PF.cpp
+﻿  PathFinding.cpp
+C:\Users\volkl\OneDrive\Documentos\DataAndAlgorithms\PathFinding\PathFinding\PathFinding.cpp(251,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\volkl\OneDrive\Documentos\DataAndAlgorithms\PathFinding\PathFinding\PathFinding.cpp(248,12): warning C4101: 'a': unreferenced local variable
+C:\Users\volkl\OneDrive\Documentos\DataAndAlgorithms\PathFinding\PathFinding\PathFinding.cpp(248,48): warning C4101: 'walls': unreferenced local variable
+C:\Users\volkl\OneDrive\Documentos\DataAndAlgorithms\PathFinding\PathFinding\PathFinding.cpp(248,34): warning C4101: 'parent': unreferenced local variable
+C:\Users\volkl\OneDrive\Documentos\DataAndAlgorithms\PathFinding\PathFinding\PathFinding.cpp(248,6): warning C4101: 'v': unreferenced local variable
+C:\Users\volkl\OneDrive\Documentos\DataAndAlgorithms\PathFinding\PathFinding\PathFinding.cpp(248,42): warning C4101: 'cost': unreferenced local variable
+C:\Users\volkl\OneDrive\Documentos\DataAndAlgorithms\PathFinding\PathFinding\PathFinding.cpp(248,27): warning C4101: 'aux': unreferenced local variable
+C:\Users\volkl\OneDrive\Documentos\DataAndAlgorithms\PathFinding\PathFinding\PathFinding.cpp(250,17): warning C4101: 'queue': unreferenced local variable
+C:\Users\volkl\OneDrive\Documentos\DataAndAlgorithms\PathFinding\PathFinding\PathFinding.cpp(248,20): warning C4101: 'num': unreferenced local variable
   PathFinding.vcxproj -> C:\Users\volkl\OneDrive\Documentos\DataAndAlgorithms\PathFinding\Debug\PathFinding.exe

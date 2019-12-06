@@ -7,10 +7,12 @@
 #include "Input.h"
 #include "PF.h"
 #include "PriorityQueue.h"
+#include <chrono>
 using namespace std;
 
 int main()
 {
+	/*
 	string input;
 	pair<int*, int> sequence;
 	int v, w, a, i, *num, *aux, *parent, cost, walls;
@@ -239,4 +241,56 @@ int main()
 	delete graph;
 
 	return 0;
+	*/
+	//start the code to run the tests and get averages plus the biggest difference between the two in one run
+	string input;
+	pair<int*, int> sequence;
+	int v, w, a, i, * num, * aux, * parent, cost, walls, tests;
+	GraphAdj* graph;
+	PriorityQueue* queue;
+	srand(time(NULL));
+	double average_d = 0.0, average_a = 0.0, duration_a = 0,
+		duration_d = 0,	dif_a_big = 0, dif_d_big = 0;
+
+	cout << "write the  size of grid" << endl;
+
+	cin >> w;
+
+	graph  = RandomGrid(w* w / 3, w, w);
+
+	cout << "now write amount of test to" << endl;
+
+	cin >> tests;
+
+	for (i = 0; i < tests; i++) {
+		int rand1 = rand() % w;
+		int rand2 = rand() % w;
+		cout << i << endl;
+		auto t1 = chrono::high_resolution_clock::now();
+		PF::Dijkstra(graph, rand1, rand2);
+		auto t2 = chrono::high_resolution_clock::now();
+		duration_d = chrono::duration<double>(t2 - t1).count();
+		average_d += duration_d;
+
+		t1 = chrono::high_resolution_clock::now();
+		PF::AStar(graph, rand1, rand2);
+		t2 = chrono::high_resolution_clock::now();
+		duration_a = chrono::duration<double>(t2 - t1).count();
+		average_a += duration_a;
+
+		if (duration_d - duration_a > dif_d_big - dif_a_big) {
+			dif_d_big = duration_d;
+			dif_a_big = duration_a;
+		}
+		
+	}
+	cout << "the biggest difference is between " << dif_d_big << " and "
+		<< dif_a_big << endl;
+	
+	cout << average_d / tests << endl;
+	cout << average_a / tests << endl;
+
+	cout << "press 1 to close the application" << endl;
+
+	cin >> i;
 }

@@ -6,6 +6,8 @@
 using namespace std;
 namespace	PF
 {
+	//the collection of all pathfinding algorithms
+
 	void BFS(GraphAdj* graph, int vi, int vf) {
 		int i, j, *parent, *num, *order_path;
 
@@ -13,7 +15,7 @@ namespace	PF
 		num = new int[graph->GetV()];
 		order_path = new int[graph->GetV()];
 
-		BFS(graph, vi, num, parent);
+		PreBFS(graph, vi, num, parent);
 
 		if (parent[vf] != -1) {
 			j = 0;
@@ -48,7 +50,7 @@ namespace	PF
 		num = new int[graph->GetV()];
 		order_path = new int[graph->GetV()];
 
-		BFSEarlyExit(graph, vi, num, parent, vf);
+		PreBFSEarlyExit(graph, vi, num, parent, vf);
 
 		if (parent[vf] != -1) {
 			j = 0;
@@ -95,22 +97,22 @@ namespace	PF
 			}
 			order_path[j] = vi;
 			for (i = j; i >= 0; i--) {
-				cout << order_path[i];
+				//cout << order_path[i];
 				if (i != 0) {
-					cout << " -> ";
+					//cout << " -> ";
 				}
 			}
-			cout << endl;
+			//cout << endl;
 		}
 		else {
-			cout << "there is no path between " << vi <<
-				" and " << vf << endl;
+			//cout << "there is no path between " << vi <<
+			//	" and " << vf << endl;
 		}
 		delete[] parent;
 		delete[] order_path;
 		auto t2 = chrono::high_resolution_clock::now();
-		cout << "time to execute: " <<
-		chrono::duration<double>(t2 - t1).count() << endl;
+		//cout << "time to execute: " <<
+		//chrono::duration<double>(t2 - t1).count() << endl;
 	}
 	void AStar(GraphAdj* graph, int vi, int vf) {
 		int i, j, * parent, * order_path;
@@ -130,21 +132,21 @@ namespace	PF
 			}
 			order_path[j] = vi;
 			for (i = j; i >= 0; i--) {
-				cout << order_path[i];
+				//cout << order_path[i];
 				if (i != 0) {
-					cout << " -> ";
+					//cout << " -> ";
 				}
 			}
-			cout << endl;
+			//cout << endl;
 		}
 		else {
-			cout << "there is no path between " << vi <<
-				" and " << vf << endl;
+			//cout << "there is no path between " << vi <<
+			//	" and " << vf << endl;
 		}
 		delete[] parent;
 		delete[] order_path;
 		auto t2 = chrono::high_resolution_clock::now();
-		cout << "time to execute: " <<
-			chrono::duration<double>(t2 - t1).count() << endl;
+		//cout << "time to execute: " <<
+			//chrono::duration<double>(t2 - t1).count() << endl;
 	}
 }
